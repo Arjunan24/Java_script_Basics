@@ -178,22 +178,68 @@ var data = [
     { birthdate: "1996", name: "John" }
   ];
 
-using loadash you can use 
- let list = _.groupBy(data, (b)=> {
-      return b.birthdate;
-    });
-    console.log(list);
+Method:01
+using loadash you can use
+let list = _.groupBy(data, (b) => {
+  return b.birthdate;
+});
+console.log(list);
 
 output
 {
-1993:[{birthdate: "1993",
-name: "Ben"}]
+  1993: [{
+    birthdate: "1993",
+    name: "Ben"
+  }]
 ....
-1996:[{birthdate: "1996"
-name: "Jane"},{birthdate: "1996"
-name: "Janet"},{
-birthdate: "1996"
-name: "John"}]
+  1996: [{
+    birthdate: "1996"
+name: "Jane"
+  }, {
+    birthdate: "1996"
+name: "Janet"
+  }, {
+    birthdate: "1996"
+name: "John"
+  }]
+}
+
+
+Method:02
+let json = {};
+data.map((item) => {
+  let bdy = item.birthdate;
+  let checkingJson = Object.keys(json).includes(bdy);
+  console.log(checkingJson);
+  if (!checkingJson) {
+    json[bdy] = [item];
+  } else {
+    json[bdy].push(item);
+  }
+});
+console.log(json);
+
+Output
+={
+  "1993": [{
+    birthdate: "1993",
+    name: "Ben"
+  }],
+    1994: [{
+      birthdate: "1994",
+      name: "John"
+    }],
+      1995: [{
+        birthdate: "1995",
+        name: "Larry"
+      }, {
+        birthdate: "1995",
+        name: "Nicole"
+      }],
+        1996: [{ birthdate: "1996", name: "Jane" },
+        { birthdate: "1996", name: "Janet" },
+        { birthdate: "1996", name: "John" },]
+
 }
 ---------------------------------
 
